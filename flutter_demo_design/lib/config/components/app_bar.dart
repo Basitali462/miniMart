@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       leading: GestureDetector(
         onTap: (){
-          Scaffold.of(context).openDrawer();
+          //Scaffold.of(context).openDrawer();
         },
         child: Image.asset(
           'assets/icons/menu.png',

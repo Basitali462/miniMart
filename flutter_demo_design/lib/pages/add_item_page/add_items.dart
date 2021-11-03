@@ -10,6 +10,8 @@ import 'package:flutter_demo_design/pages/add_item_page/item_category_dropdown.d
 import 'package:flutter_demo_design/pages/add_item_page/pick_image_btn.dart';
 import 'package:flutter_demo_design/pages/add_item_page/select_multi_images.dart';
 import 'package:flutter_demo_design/provider/add_item_provider.dart';
+import 'package:flutter_demo_design/provider/category_change_provider.dart';
+import 'package:flutter_demo_design/provider/fetch_items_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddItems extends StatefulWidget {
@@ -19,6 +21,8 @@ class AddItems extends StatefulWidget {
 
 class _AddItemsState extends State<AddItems> {
   final formKey = GlobalKey<FormState>();
+  FetchItemProvider fetchProvider;
+  CategoryProvider categoryProvider;
 
   addItem(AddItemProvider provider) async{
     final item = ItemsModel(
@@ -39,8 +43,10 @@ class _AddItemsState extends State<AddItems> {
     );
     final id = await SheetApi.getRowCount() + 1;
     print('row id $id');
-    final newUser = item.copy(id: id);
-    await SheetApi.insert([newUser.toJson()]);
+    final newItem = item.copy(id: id);
+    await SheetApi.insert([newItem.toJson()]);
+    fetchProvider.addNewItem(newItem);
+    fetchProvider.setCategoryItemToShow(categoryProvider.selectedCategoryName);
     provider.changeAppState(AppStateEnum.idle);
   }
 
@@ -54,6 +60,8 @@ class _AddItemsState extends State<AddItems> {
   @override
   Widget build(BuildContext context) {
     final addItemProvider = Provider.of<AddItemProvider>(context);
+    fetchProvider = Provider.of<FetchItemProvider>(context);
+    categoryProvider = Provider.of<CategoryProvider>(context);
     return Stack(
       children: [
         WillPopScope(
@@ -189,7 +197,7 @@ class _AddItemsState extends State<AddItems> {
                   ),
                 ),
               ),
-            )
+            ),
           ),
         ),
         addItemProvider.currentAppState == AppStateEnum.idle

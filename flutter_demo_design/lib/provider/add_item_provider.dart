@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 class AddItemProvider with ChangeNotifier{
   AppStateEnum currentAppState = AppStateEnum.idle;
   //select category
-  List<String> categoryList = ['Fruit', 'Vegetables'];
+  List<String> categoryList = ['Fruits', 'Veggies', 'Dairy', 'Meat'];
   String selectedCategory;
 
   //upload image

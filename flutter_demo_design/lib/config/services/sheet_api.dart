@@ -1,4 +1,5 @@
 import 'package:flutter_demo_design/config/models/items_fields_model.dart';
+import 'package:flutter_demo_design/config/models/items_model.dart';
 import 'package:gsheets/gsheets.dart';
 
 class SheetApi{
@@ -51,5 +52,13 @@ class SheetApi{
     if(userSheet == null) return;
 
     userSheet.values.map.appendRows(rowList);
+  }
+
+  //Fetch data
+  static Future<List<ItemsModel>> getProducts() async{
+    if(userSheet == null) return null;
+
+    final products = await userSheet.values.map.allRows();
+    return products == null ? [] : products.map(ItemsModel.fromJson).toList();
   }
 }

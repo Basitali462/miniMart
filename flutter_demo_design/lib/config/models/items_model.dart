@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_demo_design/config/models/items_fields_model.dart';
 
 class ItemsModel{
@@ -63,6 +65,23 @@ class ItemsModel{
     discountPercentage: discountPercentage ?? this.discountPercentage,
     supplier: supplier ?? this.supplier,
     quantity: quantity ?? this.quantity,
+  );
+
+  static ItemsModel fromJson(Map<String, dynamic> json) => ItemsModel(
+    id: jsonDecode(json[ItemFields.id]),
+    name: json[ItemFields.name],
+    description: json[ItemFields.description],
+    category: json[ItemFields.category],
+    brand: json[ItemFields.brand],
+    price: json[ItemFields.price],
+    image: json[ItemFields.image],
+    gallery: json[ItemFields.gallery],
+    country: json[ItemFields.country],
+    weight: json[ItemFields.weight],
+    pricePromo: json[ItemFields.pricePromo],
+    discountPercentage: json[ItemFields.discountPercentage],
+    supplier: json[ItemFields.supplier],
+    quantity: json[ItemFields.quantity],
   );
 
   Map<String, dynamic> toJson() => {

@@ -6,6 +6,7 @@ import 'package:flutter_demo_design/pages/home_page.dart';
 import 'package:flutter_demo_design/provider/add_item_provider.dart';
 import 'package:flutter_demo_design/provider/bottom_bar_provider.dart';
 import 'package:flutter_demo_design/provider/category_change_provider.dart';
+import 'package:flutter_demo_design/provider/fetch_items_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_demo_design/config/routes/router.dart' as router;
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => BottomBarProvider()),
         ChangeNotifierProvider(create: (_) => AddItemProvider()),
+        ChangeNotifierProvider(create: (_) => FetchItemProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
